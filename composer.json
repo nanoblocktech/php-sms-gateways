@@ -1,0 +1,37 @@
+{
+    "name": "nanoblocktech/php-sms-gateways",
+    "type": "library",
+    "description": "PHP class for sms gateways, using same codebase implementaion to send sms in different sms gateways.",
+    "license": "MIT",
+    "keywords": ["PHP", "Luminova", "SMS", "SMS gateway", "multiple sms gateways", "ClickSend", "Vonage"],
+    "authors": [
+        {
+            "name": "Ujah Chigozie",
+            "email": "ujahchigozie@gmail.com"
+        },
+       {
+            "name": "Nanoblock Technology",
+            "email": "code@nanoblocktech.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/nanoblocktech/php-sms-gateways/issues",
+        "source": "https://github.com/nanoblocktech/php-sms-gateways"
+    },
+    
+    "require": {
+       "php": "^8.0",
+       "clicksend/clicksend-php": "^4.0.4"
+    },
+    
+    "autoload": {
+        "psr-4": { 
+            "Luminova\\ExtraUtils\\Sms\\": "src/" 
+        }
+  },
+  "config": {
+        "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
