@@ -12,6 +12,7 @@ namespace Luminova\ExtraUtils\Sms\Providers;
 use Luminova\ExtraUtils\Sms\Interface\ProviderInterface;
 use Luminova\ExtraUtils\Sms\Surface\MessageSurface;
 use Luminova\ExtraUtils\Sms\Response;
+use Luminova\ExtraUtils\Sms\Exceptions\SmsException;
 use \ClickSend\Configuration;
 use \ClickSend\Api\SMSApi as SmsClient;
 use \ClickSend\Model\SmsMessage;
@@ -45,9 +46,15 @@ class ClickSend implements ProviderInterface
      * 
      * @param string $user Api username 
      * @param string $key Api key / password
+     * 
+     * @throws SmsException
     */
     public function __construct($user, $key)
     {
+        if (!class_exists(SmsClient::class)) {
+            throw new SmsException('To use clickSend api, you need to first install the library by running [composer require clicksend/clicksend-php]');
+        }
+        
         $this->config = Configuration::getDefaultConfiguration()->setUsername($user)->setPassword($key);
     }
 
