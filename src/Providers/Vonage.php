@@ -11,6 +11,7 @@ namespace Luminova\ExtraUtils\Sms\Providers;
 
 use Luminova\ExtraUtils\Sms\Interface\ProviderInterface;
 use Luminova\ExtraUtils\Sms\Surface\MessageSurface;
+use Luminova\ExtraUtils\Sms\Exceptions\SmsException;
 use Luminova\ExtraUtils\Sms\Response;
 use \Vonage\Client\Credentials\Basic;
 use \Vonage\Client as SmsClient;
@@ -44,9 +45,15 @@ class Vonage implements ProviderInterface
      * 
      * @param string $key Api key 
      * @param string $secret Api secret key
+     * 
+     * @throws SmsException
     */
     public function __construct($key, $secret)
     {
+        if (!class_exists(SmsClient::class)) {
+            throw new SmsException('To use Vonage api, you need to first install the library by running [composer require vonage/client]');
+        }
+        
         $this->config = new Basic($key, $secret);    
     }
 
