@@ -4,8 +4,8 @@ PHP class for sms gateways, using same codebase and implementation to send sms i
 
 ### AVAILABLE SMS PROVIDERS
 
-- Vonage
-- ClickSend
+- Vonage: To use Vonage as provider, install the library `composer require vonage/client`
+- ClickSend To use ClickSend as provider, install the library `composer require clicksend/clicksend-php`
 
 Installation Guide via Composer:
 
