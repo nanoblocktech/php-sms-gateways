@@ -60,6 +60,51 @@ try {
 }
 ```
 
+Send sms using modem serial port 
+
+```php
+use Luminova\ExtraUtils\Sms\SerialGateway;
+try{
+    $serial = new SerialGateway('COM4', 'en_US');
+    $serial->send('000000000', 'Hello your verification code is 1234', function($data){
+        echo "Message sent successfully";
+    });
+} catch (SmsException $e){
+    echo $e->getMessage();
+}
+```
+
+Configuring your serial 
+
+```php
+use Luminova\ExtraUtils\Sms\SerialGateway;
+$to = '9999999999';
+$message = 'Hello your verification code is 1234';
+
+try{
+    $serial = new SerialGateway('COM4', 'en_US');
+    $serial->setBaudRate(9600);
+    $serial->setParity('none');
+    $serial->setCharacterLength(8);
+    $serial->setStopBits(1);
+    $serial->setFlowControl('none');
+    if($serial->openDevice()){
+        $serial->sendMessage("AT+CMGF=1\n\r"); 
+        $serial->sendMessage("AT+cmgs=\"{$to}\"\n\r");
+        $serial->sendMessage("{$message}\n\r");
+        $serial->sendMessage(chr(26));
+
+        sleep(7);
+
+        $read = $serial->readPort(0);
+        $serial->closeDevice();
+        echo "Message was sent successfully";
+    }
+} catch (SmsException $e){
+    echo $e->getMessage();
+}
+```
+
 Response methods 
 
 ```php
