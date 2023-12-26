@@ -525,7 +525,8 @@ class SerialGateway
         if ($this->os === "linux" || $this->os === "osx") {
             // Behavior in OSX isn't to wait for new data to recover, but just grabs what's there!
             // Doesn't always work perfectly for me in OSX
-            $content = ""; $i = 0;
+            $content = ""; 
+            $i = 0;
 
             if ($count !== 0) {
                 do {
